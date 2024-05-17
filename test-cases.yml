@@ -159,5 +159,98 @@
   expected-result: |
      Игра создалась
 
-    
+- summary: |
+    Проверка возможности восстановления пароля
+  requirement: |
+    Пользователь имеет возможность восстановить пароль
+  prerequisites:
+    Открыта страница авторизации https://codebattle.hexlet.io/session/new?locale=en&next=%2F
+  test-data: |
+    Email = ramovskiy@gmail.com
+  steps:
+    - Нажимаем на кнопку Forgot your password?
+    - Вводим Email
+    - Нажимаем кнопку Submit
+    - Проверяем свою эллектронную почту на наличие письма
+    - Нажимаем на ссылку указаную в письме
+    - Придумываем новый пароль
+    - Нажимаем кнопку Save
+  expected-result: |
+    Пароль восстановлен. Пользователь должен попасть в свою учетную запись
 
+- summary: |
+    Проверка возможности создания новой игры по уровню сложности
+  requirement: |
+    Пользователь может создать новую игру, задав уровень сложности
+  prerequisites:
+    Пользователь авторизован
+    Открыта страница https://codebattle.hexlet.io/#lobby
+  test-data: |
+    отсутствуют
+  steps:
+    - В правом верхнем углу нажимаем кнопку Create a game
+    - В Level выбираем 4 звезды
+    - Нажимаем кнопку Create battle
+    - Нажимаем кнопку Continue
+  expected-result: |
+    Созданная игра должна появится в лобби
+
+- summary: | 
+    Проверка возможности создания новой игры с другом
+  requirement: | 
+    Пользователь может создать новую игру с другим другом
+  prerequisites: |
+    Пользователь авторизован
+    Открыта страница https://codebattle.hexlet.io/#lobby
+  test-data: |
+    отсутствуют
+  steps: 
+    - В правом верхнем углу нажимаем на кнопку Create a game
+    - В Game Type нажимаем кнопку With a friend
+    - В Choose opponent выбираем пользователя
+    - Нажимаем кнопку Create invite
+  expected-result: |
+    Приглашение должно отправится выбранному пользователю
+
+- summary: |
+    Проверка возможности завершения игры после выполнения задания
+  requirement: |
+    Пользователь имеет возможность завершить игру, выполнив задание
+  prerequisites:
+    Пользователь авторизован
+    Открыта страница https://codebattle.hexlet.io/#lobby
+    Создана игра с ботом
+  test-data: |
+    Параметры игры:
+    level = 1
+    game type = with a bot
+    time control = 36 min
+    chose task = random task
+  steps:
+    - Выбираем язык программирования Node.js
+    - В редактор кода прописываем решение игры
+    - Нажимаем на кнопку Check solution
+  expected-result: |
+    После проверки кода появляется сообщение о правильности решения
+
+- summary: |
+    Проверка возможности отправки сообщения во время игры
+  requirement: |
+    Пользователь может отправить сообщение во время игры
+  prerequisites:
+    Пользователь авторизован
+    Открыта страница https://codebattle.hexlet.io/#lobby
+    Создана игра с ботом
+  test-data: |
+    Параметры игры: 
+    level = 3
+    game type = with a bot
+    time control = 3 min
+    chose task = random task
+    Сообщение = Hello, Hexlet!
+  steps:
+    - Находим чат General в правом верху экрана
+    - В поисковой строке чата General пишем сообщение
+    - Нажимаем кнопку Send
+  expected-result: |
+    Сообщение должно появится в чате
